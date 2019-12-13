@@ -1,0 +1,77 @@
+{
+  "name": "omc-membership",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [],
+  "author": "Blake Kelley <blake.t.kelley@gmail.com> (https://bkelley.dev)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelley12/omc-membership.git"
+  },
+  "homepage": "https://github.com/kelley12/omc-membership#readme",
+  "bugs": {
+    "url": "https://github.com/kelley12/omc-membership/issues"
+  },
+  "license": "ISC",
+  "main": "dist/server/index.js",
+  "bin": {
+    "omcmembership": "dist/server/index.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "src/client/*",
+      "dist/client/*"
+    ],
+    "delay": "1000"
+  },
+  "scripts": {
+    "dev": "npm run build-dev || true && concurrently --kill-others 'npm run server-watch' 'npm run client-watch' 'npm run nodemon'",
+    "build-dev": "npm ci && cd ./src/shared && tsc -b && cd ../client && webpack --progress --config=webpack.config.dev.js --mode development && cd ../server && tsc -b",
+    "client-watch": "cd ./src/client && webpack -w --progress --config=webpack.config.dev.js --mode development",
+    "server-watch": "cd ./src/server && tsc -b --watch",
+    "nodemon": "nodemon dist/server/index.js",
+    "start": "node dist/server/index.js",
+    "debug": "node --inspect dist/server/index.js",
+    "build": "NODE_ENV=production && npm ci && cd ./src/shared && tsc -b && cd ../client && webpack --progress --config=webpack.config.prod.js --mode production && cd ../server && tsc -b",
+    "test": "jest --runInBand 'dist/**/test/*.js'",
+    "dev-test": "jest --watch --runInBand"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "body-parser": "^1.19.0",
+    "bulma": "^0.8.0",
+    "eventemitter2": "^5.0.1",
+    "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
+    "html-loader": "^0.5.5",
+    "page": "^1.11.3",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.3",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/fs-extra": "^8.0.1",
+    "@types/node": "^12.12.17",
+    "@types/page": "^1.8.0",
+    "@types/socket.io": "^2.1.4",
+    "@types/socket.io-client": "^1.4.32",
+    "circular-dependency-plugin": "^5.2.0",
+    "concurrently": "^5.0.1",
+    "css-loader": "^3.3.2",
+    "fork-ts-checker-webpack-plugin": "^3.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.1",
+    "style-loader": "^1.0.1",
+    "supertest": "^4.0.2",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2"
+  }
+}

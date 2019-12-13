@@ -1,0 +1,19 @@
+.full-width {
+    max-width: 100%;
+}
+
+.container {
+    padding-top: 10px;
+    width: 100%;
+    max-width: 2350px;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.vertically-spaced > *:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+
+header.card-header {
+    background-color: #F5F5F5;
+}

@@ -1,0 +1,6 @@
+src
+.vscode
+*.zip
+*.tgz
+*.log
+*.md

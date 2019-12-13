@@ -1,0 +1,39 @@
+<div class="container">
+    <h1 class="title">Members</h1>
+
+    <div class="control">
+        <input class="input is-focused is-rounded" type="text" placeholder="Search" v-model="searchText"  v-on:input="searchMembers()">
+    </div>
+
+    <div class="table-container">
+        <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+                <tr>
+                    <th style="display:none;">ID</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>MIGS</th>
+                    <th>Description</th>
+                    <th>Membership Type</th>
+                    <th>Family</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="member in members">
+                    <td style="display:none;">{{ member.id }}</td>
+                    <td>{{ member.lastName }}</td>
+                    <td>{{ member.firstName }}</td>
+                    <td>
+                        <span class="icon is-small">
+                            <i v-if="member.migs" class="fas fa-check"></i>
+                            <i v-else class="fas fa-times-circle"></i>
+                        </span>
+                    </td>
+                    <td>{{ member.description }}</td>
+                    <td>{{ member.membershipType }}</td>
+                    <td>{{ member.family }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
