@@ -27,6 +27,11 @@
 - [Jest](https://jestjs.io/)
 - [Supertest](https://github.com/visionmedia/supertest)
 
+**OR**
+
+- [Mocha](https://mochajs.org/)
+- [Chai](https://www.chaijs.com/)
+
 ## CI/CD & Hosting
 
 - [Travis](https://travis-ci.com/)
