@@ -1,8 +1,8 @@
-# question-answer
+# omc-membership
 
-[![Build Status](https://travis-ci.com/kelley12/question-answer.svg?branch=master)](https://travis-ci.com/kelley12/question-answer)
-[![Dependency Status](https://david-dm.org/kelley12/question-answer/status.svg?style=flat)](https://david-dm.org/kelley12/question-answer)
-[![devDependencies Status](https://david-dm.org/kelley12/question-answer/dev-status.svg)](https://david-dm.org/kelley12/question-answer?type=dev)
+[![Build Status](https://travis-ci.com/kelley12/omc-membership.svg?branch=master)](https://travis-ci.com/kelley12/omc-membership)
+[![Dependency Status](https://david-dm.org/kelley12/omc-membership/status.svg?style=flat)](https://david-dm.org/kelley12/omc-membership)
+[![devDependencies Status](https://david-dm.org/kelley12/omc-membership/dev-status.svg)](https://david-dm.org/kelley12/omc-membership?type=dev)
 
 ## Owyhee Motorcycle Club Membership
 
