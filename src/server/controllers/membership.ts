@@ -1,50 +1,43 @@
 import { EventEmitter2 } from "eventemitter2";
 import { Member } from "../../shared";
+import { default as axios } from "axios";
 
 export class MembershipController {
     private readonly emitter = new EventEmitter2();
+    private readonly rowRegex = /<tr>([\w\s()]|<[\/]*td>)+<\/tr>/g;
+    private readonly columnRegex = /<td>([\w\s()]*)<\/td>/g;
+    private readonly replaceRegex = /<[\/]*td>/g;
 
-    getMemberList(): Member[] {
-        let members = [];
-        members = [
-            {
-                "id": "127",
-                "lastName": "Kelley",
-                "firstName": "Blake",
-                "migs": true,
-                "description": "Blake's Membership",
-                "membershipType": "B",
-                "family": "Jesica"
-            },
-            {
-                "id": "243",
-                "lastName": "Calugaru",
-                "firstName": "Andrei",
-                "migs": false,
-                "description": "Andrea's Membership",
-                "membershipType": "B",
-                "family": ""
-            },
-            {
-                "id": "413",
-                "lastName": "Schoeppach",
-                "firstName": "Chris",
-                "migs": true,
-                "description": "Chris's Membership",
-                "membershipType": "B",
-                "family": "Theresa"
-            },
-            {
-                "id": "827",
-                "lastName": "Baker",
-                "firstName": "Doug",
-                "migs": false,
-                "description": "Doug's Membership",
-                "membershipType": "B",
-                "family": ""
-            }
-        ];
-        return members;
+    async getMemberList(): Promise<Member[]> {
+        const members: Member[] = [];
+
+        return axios.get("http://bhouse.mynetgear.com/migschkgood2.php")
+            .then(res => {
+                const table: string = res.data;
+                const rows = table.match(this.rowRegex);
+                if (rows) {
+                    rows.forEach(row => {
+                        const columns = row.match(this.columnRegex);
+                        if (columns) {
+                            const migs = columns[3].replace(this.replaceRegex, "");
+                            const member: Member = {
+                                "id": columns[0].replace(this.replaceRegex, ""),
+                                "lastName": columns[1].replace(this.replaceRegex, ""),
+                                "firstName": columns[2].replace(this.replaceRegex, ""),
+                                "migs": migs.toLowerCase() === "y" ? true : false,
+                                "description": columns[4].replace(this.replaceRegex, ""),
+                                "membershipType": columns[5].replace(this.replaceRegex, ""),
+                                "family": columns[6].replace(this.replaceRegex, "")
+                            };
+                            members.push(member);
+                        }
+                    });
+                    return members;
+                } else {
+                    return members;
+                }
+            })
+            .catch(_ => members);
     }
 
     on(event: "Error", cb: (error: Error) => void): this;

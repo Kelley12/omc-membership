@@ -1,6 +1,6 @@
 {
   "name": "omc-membership",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "",
   "keywords": [],
   "author": "Blake Kelley <blake.t.kelley@gmail.com> (https://bkelley.dev)",
@@ -30,16 +30,19 @@
     "client-watch": "cd ./src/client && webpack -w --progress --config=webpack.config.dev.js --mode development",
     "server-watch": "cd ./src/server && tsc -b --watch",
     "nodemon": "nodemon dist/server/index.js",
-    "start": "node dist/server/index.js",
     "debug": "node --inspect dist/server/index.js",
-    "build": "NODE_ENV=production && npm ci && cd ./src/shared && tsc -b && cd ../client && webpack --progress --config=webpack.config.prod.js --mode production && cd ../server && tsc -b",
+    "postinstall": "npm run build",
+    "build": "NODE_ENV=production && cd ./src/shared && tsc -b && cd ../client && webpack --progress --config=webpack.config.prod.js --mode production && cd ../server && tsc -b",
+    "start": "node dist/server/index.js",
     "test": "mocha --exit 'dist/**/test/*.js'",
     "dev-test": "mocha --watch 'dist/**/test/*.js'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.0",
+    "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "bulma": "^0.8.0",
+    "chokidar": "^3.3.0",
     "compression-webpack-plugin": "^3.0.1",
     "eventemitter2": "^5.0.1",
     "express": "^4.17.1",
@@ -73,5 +76,9 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-merge": "^4.2.2"
+  },
+  "engines": {
+    "node": ">=12.13.0",
+    "npm": ">=6.4.0"
   }
 }
