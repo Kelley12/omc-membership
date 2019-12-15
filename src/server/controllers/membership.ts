@@ -15,7 +15,6 @@ export class MembershipController {
             .then(res => {
                 const table: string = res.data;
                 const rows = table.match(this.rowRegex);
-                console.log(rows);
                 if (rows) {
                     rows.forEach(row => {
                         const columns = row.match(this.columnRegex);
