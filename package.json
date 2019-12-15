@@ -30,9 +30,10 @@
     "client-watch": "cd ./src/client && webpack -w --progress --config=webpack.config.dev.js --mode development",
     "server-watch": "cd ./src/server && tsc -b --watch",
     "nodemon": "nodemon dist/server/index.js",
-    "start": "node dist/server/index.js",
     "debug": "node --inspect dist/server/index.js",
+    "postinstall": "npm run build",
     "build": "NODE_ENV=production && npm ci && cd ./src/shared && tsc -b && cd ../client && webpack --progress --config=webpack.config.prod.js --mode production && cd ../server && tsc -b",
+    "start": "node dist/server/index.js",
     "test": "mocha --exit 'dist/**/test/*.js'",
     "dev-test": "mocha --watch 'dist/**/test/*.js'"
   },
